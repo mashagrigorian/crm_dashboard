@@ -1,0 +1,23 @@
+/* Sections.css */
+.sections {
+    margin: 20px;
+  }
+  
+  .sections ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sections li {
+    cursor: pointer;
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .sections li:hover {
+    background-color: #e0e0e0;
+  }
+  
