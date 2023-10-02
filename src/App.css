@@ -1,38 +1,25 @@
-.App {
-  text-align: center;
-}
+/* App.css */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* The main container for the entire dashboard */
+.dashboard-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Style for the left side */
+.left-part {
+  flex: 1; /* Takes up one-third of the available space */
+  margin-right: 20px; /* Add spacing between left and center */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Style for the center part */
+.center-part {
+  flex: 1; /* Takes up one-third of the available space */
+}
+
+/* Style for the right side */
+.right-part {
+  flex: 1; /* Takes up one-third of the available space */
 }

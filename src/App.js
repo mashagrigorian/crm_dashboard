@@ -1,14 +1,16 @@
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
-import Nav from "./components/Nav";
-import Header from "./components/Header";
-import Login from "./components/Login";
+import React from "react";
+import "./App.css"; // You may have other CSS imports
+import Dashboard from "./components/Dashboard"; // Import your Dashboard component
 
 function App() {
   return (
     <div className="App">
-      <Nav />
-      <Header />
-      <Login />
+      <header className="App-header">
+        {/* You can include a header or other components here */}
+      </header>
+      <main>
+        <Dashboard />
+      </main>
     </div>
   );
 }
