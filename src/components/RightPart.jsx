@@ -160,6 +160,7 @@ function RightPart({ selectedPassword, onClose, onSave }) {
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         inputProps={{ maxLength: 1200 }}
+        placeholder="Enter up to 1200 characters"
       />
 
       <TextField

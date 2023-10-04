@@ -7,8 +7,13 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
+  dialogPaper: {
+    width: "500px", // Set the width to 500px
+    height: "600px", // Set the height to 600px
+  },
   dialogContent: {
-    paddingTop: theme.spacing(2),
+    backgroundColor: "#000",
+    color: "#fff",
   },
 }));
 
@@ -16,7 +21,11 @@ function PopUp1({ open, onClose }) {
   const classes = useStyles();
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      classes={{ paper: classes.dialogPaper }}
+    >
       <DialogTitle>PopUp 1</DialogTitle>
       <DialogContent className={classes.dialogContent}>
         {/* Add content for PopUp 1 */}
