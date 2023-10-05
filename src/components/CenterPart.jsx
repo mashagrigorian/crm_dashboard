@@ -45,7 +45,6 @@ function CenterPart() {
       name: "Password 2",
       link: "https://example.com/2",
     },
-    // Add more data as needed
   ]);
 
   // Function to toggle sorting order

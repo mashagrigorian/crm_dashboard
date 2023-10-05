@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import FileCopyIcon from "@material-ui/icons/FileCopy"; // Icon for Copy
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
@@ -32,16 +29,51 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     marginTop: theme.spacing(2),
   },
+  // Define password strength color classes
+  weakPassword: {
+    color: "red",
+  },
+  mediumPassword: {
+    color: "orange",
+  },
+  strongPassword: {
+    color: "green",
+  },
 }));
 
 function RightPart({ selectedPassword, onClose, onSave }) {
-  const classes = useStyles();
   const [name, setName] = useState(
     selectedPassword ? selectedPassword.name : ""
   );
+  const classes = useStyles();
   const [password, setPassword] = useState(
     selectedPassword ? selectedPassword.password : ""
   );
+
+  // Function to evaluate password strength (you can replace this with your own logic)
+  const evaluatePasswordStrength = (password) => {
+    if (password.length < 6) {
+      return "weak";
+    } else if (password.length < 10) {
+      return "medium";
+    } else {
+      return "strong";
+    }
+  };
+
+  // Determine the password strength
+  const passwordStrength = evaluatePasswordStrength(password);
+
+  // Handle saving changes
+  const handleSaveChanges = () => {
+    // You can save the updated password or perform any other actions here
+    const updatedPassword = {
+      password,
+    };
+
+    onSave(updatedPassword); // Call the onSave function with the updated password
+  };
+
   const [link, setLink] = useState(
     selectedPassword ? selectedPassword.link : ""
   );
@@ -54,25 +86,8 @@ function RightPart({ selectedPassword, onClose, onSave }) {
 
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
-  const handleCopyPassword = () => {
-    // Implement password copy logic (e.g., using the Clipboard API)
-    // You can display a success message here.
-  };
-
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword); // Toggle the password visibility state
-  };
-
-  const handleSaveChanges = () => {
-    const updatedPassword = {
-      name,
-      password,
-      link,
-      comment,
-      color: passwordColor,
-    };
-
-    onSave(updatedPassword);
   };
 
   return (
@@ -89,11 +104,7 @@ function RightPart({ selectedPassword, onClose, onSave }) {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton
-                onClick={handleCopyPassword}
-                edge="end"
-                aria-label="Copy Name"
-              >
+              <IconButton edge="end" aria-label="Copy Name">
                 <FileCopyIcon />
               </IconButton>
             </InputAdornment>
@@ -104,31 +115,43 @@ function RightPart({ selectedPassword, onClose, onSave }) {
       <TextField
         label="Password"
         variant="outlined"
-        className={classes.input}
+        className={`${classes.input} ${
+          passwordStrength === "weak"
+            ? classes.weakPassword
+            : passwordStrength === "medium"
+            ? classes.mediumPassword
+            : classes.strongPassword
+        }`}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        type={showPassword ? "text" : "password"} // Toggle password visibility
+        type="password"
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton
-                onClick={handleTogglePasswordVisibility} // Toggle password visibility
-                edge="end"
-                aria-label="Toggle Password Visibility"
-              >
+              <IconButton edge="end" aria-label="Toggle Password Visibility">
                 {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-              </IconButton>
-              <IconButton
-                onClick={handleCopyPassword}
-                edge="end"
-                aria-label="Copy Password"
-              >
-                <FileCopyIcon />
               </IconButton>
             </InputAdornment>
           ),
         }}
       />
+
+      {/* Password strength indicator */}
+      {passwordStrength === "weak" && (
+        <Typography variant="caption" color="error">
+          Weak Password
+        </Typography>
+      )}
+      {passwordStrength === "medium" && (
+        <Typography variant="caption" color="secondary">
+          Medium Password
+        </Typography>
+      )}
+      {passwordStrength === "strong" && (
+        <Typography variant="caption" color="primary">
+          Strong Password
+        </Typography>
+      )}
 
       <TextField
         label="URL"
@@ -139,11 +162,7 @@ function RightPart({ selectedPassword, onClose, onSave }) {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton
-                onClick={handleCopyPassword}
-                edge="end"
-                aria-label="Copy Name"
-              >
+              <IconButton edge="end" aria-label="Copy Name">
                 <FileCopyIcon />
               </IconButton>
             </InputAdornment>
@@ -156,30 +175,12 @@ function RightPart({ selectedPassword, onClose, onSave }) {
         variant="outlined"
         multiline
         className={classes.input}
-        minRows={6} // Use minRows instead
+        minRows={6} 
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         inputProps={{ maxLength: 1200 }}
         placeholder="Enter up to 1200 characters"
       />
-
-      <TextField
-        label="Password Color"
-        type="color"
-        variant="outlined"
-        className={classes.input}
-        value={passwordColor}
-        onChange={(e) => setPasswordColor(e.target.value)}
-      />
-
-      <div className={classes.buttons}>
-        <IconButton onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-        <Button variant="contained" color="primary" onClick={handleSaveChanges}>
-          Save Changes
-        </Button>
-      </div>
     </div>
   );
 }

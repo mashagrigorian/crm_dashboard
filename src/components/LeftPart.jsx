@@ -3,10 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import VpnKeyIcon from "@material-ui/icons/VpnKey"; // Icon for PopUp1
-import SettingsIcon from "@material-ui/icons/Settings"; // Icon for PopUp2
-import PopUp1 from "./PopUp1"; // Import your PopUp1 component
-import PopUp2 from "./PopUp2"; // Import your PopUp2 component
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import SettingsIcon from "@material-ui/icons/Settings";
+import PopUp1 from "./PopUp1";
+import PopUp2 from "./PopUp2";
 
 const useStyles = makeStyles((theme) => ({
   leftPart: {
@@ -48,25 +48,12 @@ function LeftPart() {
     "Section 2",
   ]);
   const [selectedSection, setSelectedSection] = useState(null);
-  // Function to handle opening PopUp1
-  const handlePopUp1Click = () => {
-    setPopUp1Visible(true);
+
+  // Reusable function to toggle popup visibility
+  const togglePopup = (popupState, setPopupState) => {
+    setPopupState(!popupState);
   };
 
-  // Function to handle closing PopUp1
-  const handlePopUp1Close = () => {
-    setPopUp1Visible(false);
-  };
-
-  // Function to handle opening PopUp2
-  const handlePopUp2Click = () => {
-    setPopUp2Visible(true);
-  };
-
-  // Function to handle closing PopUp2
-  const handlePopUp2Close = () => {
-    setPopUp2Visible(false);
-  };
   const handleSearchClick = () => {
     setSearchVisible(!isSearchVisible);
   };
@@ -90,13 +77,17 @@ function LeftPart() {
           </IconButton>
         )}
 
-        {/* Open PopUp1 when clicking on the key */}
-        <IconButton onClick={handlePopUp1Click}>
+        {/* Toggle PopUp1 when clicking on the key */}
+        <IconButton
+          onClick={() => togglePopup(isPopUp1Visible, setPopUp1Visible)}
+        >
           <VpnKeyIcon />
         </IconButton>
 
-        {/* Open PopUp2 when clicking on Settings */}
-        <IconButton onClick={handlePopUp2Click}>
+        {/* Toggle PopUp2 when clicking on Settings */}
+        <IconButton
+          onClick={() => togglePopup(isPopUp2Visible, setPopUp2Visible)}
+        >
           <SettingsIcon />
         </IconButton>
       </div>
@@ -117,8 +108,14 @@ function LeftPart() {
         )}
       </div>
 
-      <PopUp1 open={isPopUp1Visible} onClose={handlePopUp1Close} />
-      <PopUp2 open={isPopUp2Visible} onClose={handlePopUp2Close} />
+      <PopUp1
+        open={isPopUp1Visible}
+        onClose={() => togglePopup(isPopUp1Visible, setPopUp1Visible)}
+      />
+      <PopUp2
+        open={isPopUp2Visible}
+        onClose={() => togglePopup(isPopUp2Visible, setPopUp2Visible)}
+      />
 
       {/* You can pass selectedSection to the component that displays passwords */}
     </div>

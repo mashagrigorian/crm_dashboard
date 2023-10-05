@@ -8,8 +8,8 @@ import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   dialogPaper: {
-    width: "500px", // Set the width to 500px
-    height: "600px", // Set the height to 600px
+    width: "500px", 
+    height: "600px", 
   },
   dialogContent: {
     backgroundColor: "#000",
@@ -28,7 +28,6 @@ function PopUp1({ open, onClose }) {
     >
       <DialogTitle>PopUp 1</DialogTitle>
       <DialogContent className={classes.dialogContent}>
-        {/* Add content for PopUp 1 */}
         This is the content for PopUp 1.
       </DialogContent>
       <DialogActions>

@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css"; // You may have other CSS imports
 import Dashboard from "./components/Dashboard"; // Import your Dashboard component
 
 function App() {

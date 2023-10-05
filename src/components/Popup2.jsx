@@ -28,7 +28,6 @@ function PopUp2({ open, onClose }) {
     >
       <DialogTitle>PopUp 1</DialogTitle>
       <DialogContent className={classes.dialogContent}>
-        {/* Add content for PopUp 1 */}
         This is the content for PopUp 1.
       </DialogContent>
       <DialogActions>

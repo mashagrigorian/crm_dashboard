@@ -2,9 +2,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import LeftPart from "./LeftPart"; // Import your LeftPart component
-import CenterPart from "./CenterPart"; // Import your CenterPart component
-import RightPart from "./RightPart"; // Import your RightPart component
+import LeftPart from "./LeftPart"; 
+import CenterPart from "./CenterPart"; 
+import RightPart from "./RightPart"; 
 
 const useStyles = makeStyles((theme) => ({
   container: {
